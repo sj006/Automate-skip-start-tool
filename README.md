@@ -21,7 +21,7 @@ This script is designed to be pasted directly into the browser console and works
 1. Open your browser.
 2. Open Developer Tools (`F12` or `Ctrl + Shift + I`).
 3. Go to the **Console** tab.
-4. Paste the script below and press Enter.
+4. Paste the script below and press Enter. (If you cann't paste in console try typing `allow pasting` first)
 
 ```javascript
 (function () {
