@@ -25,7 +25,7 @@ This script is designed to be pasted directly into the browser console and works
 
 ```javascript
 (function () {
-  console.log("Auto Skip/Start watcher running (visible text only)...");
+  console.log("Auto Skip/Start/Play watcher running...");
 
   function isVisible(el) {
     return el.offsetParent !== null;
@@ -43,14 +43,37 @@ This script is designed to be pasted directly into the browser console and works
         .trim()
         .toLowerCase();
 
+      const ariaLabel = (el.getAttribute("aria-label") || "")
+        .trim()
+        .toLowerCase();
+
+      const testId = (el.getAttribute("data-testid") || "")
+        .trim()
+        .toLowerCase();
+
+      // Text based detection
       if (text === "skip" || text === "start") {
-        console.log("Clicking:", el);
+        console.log("Clicking (text):", el);
+        el.click();
+        return;
+      }
+
+      // Aria label detection (for icon buttons like Play)
+      if (ariaLabel.includes("play")) {
+        console.log("Clicking (aria-label):", el);
+        el.click();
+        return;
+      }
+
+      // Data-testid detection (most reliable if available)
+      if (testId.includes("playtoggle")) {
+        console.log("Clicking (data-testid):", el);
         el.click();
       }
     });
   }
 
-  setInterval(checkAndClick, 1000); //set time interval as you want in ms
+  setInterval(checkAndClick, 1000); //set interval in ms
 })();
 ```
 
