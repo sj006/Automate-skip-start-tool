@@ -50,7 +50,7 @@ This script is designed to be pasted directly into the browser console and works
     });
   }
 
-  setInterval(checkAndClick, 1000);
+  setInterval(checkAndClick, 1000); //set time interval as you want in ms
 })();
 ```
 
