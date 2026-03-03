@@ -59,21 +59,16 @@ This script is designed to be pasted directly into the browser console and works
       }
 
       // Aria label detection (for icon buttons like Play)
-      if (ariaLabel.includes("play")) {
+      if (ariaLabel == "play") {
         console.log("Clicking (aria-label):", el);
         el.click();
         return;
       }
 
-      // Data-testid detection (most reliable if available)
-      if (testId.includes("playtoggle")) {
-        console.log("Clicking (data-testid):", el);
-        el.click();
-      }
     });
   }
 
-  setInterval(checkAndClick, 1000); //set interval in ms
+  setInterval(checkAndClick, 2000); //set interval in ms
 })();
 ```
 
