@@ -66,6 +66,17 @@ This script is designed to be pasted directly into the browser console and works
         return;
       }
 
+      //CSS based
+      // Specific Go to next item button
+      const nextButton = document.querySelector(
+        'button.cds-116.cds-iconButton-medium.cds-iconButton-primary.cds-iconButton-round.css-1tsqkug[aria-label="Go to next item"]'
+      );
+      
+      if (nextButton && isVisible(nextButton)) {
+        console.log("Clicking (specific next button):", nextButton);
+        nextButton.click();
+      }
+
     });
   }
 
