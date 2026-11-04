@@ -59,7 +59,7 @@ This script is designed to be pasted directly into the browser console and works
       }
 
       // Aria label detection (for icon buttons like Play)
-      if (ariaLabel == "play" || ||
+      if (ariaLabel == "play" || 
         ariaLabel === "go to next item") {
         console.log("Clicking (aria-label):", el);
         el.click();
