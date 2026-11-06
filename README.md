@@ -37,7 +37,9 @@ This script is designed to be pasted directly into the browser console and works
     );
 
     elements.forEach(el => {
-      if (!isVisible(el)) return;
+      if (el.offsetParent === null && window.getComputedStyle(el).display === 'none') {
+        return;
+      }
 
       const text = (el.textContent || el.value || "")
         .trim()
@@ -53,34 +55,32 @@ This script is designed to be pasted directly into the browser console and works
 
       // Text based detection
       if (text === "skip" || text === "start") {
-        console.log("Clicking (text):", el);
+        console.log(`Clicking (text|${text}):`, el);
         el.click();
         return;
       }
 
-      // Aria label detection (for icon buttons like Play)
-      if (ariaLabel == "play" || 
-        ariaLabel === "go to next item") {
-        console.log("Clicking (aria-label):", el);
+      // Aria label detection
+      if (ariaLabel === "play") {
+        console.log(`Clicking (aria-label|${ariaLabel}):`, el);
         el.click();
         return;
       }
 
-      //CSS based
-      // Specific Go to next item button
-      const nextButton = document.querySelector(
-        'button.cds-116.cds-iconButton-medium.cds-iconButton-primary.cds-iconButton-round.css-1tsqkug[aria-label="Go to next item"]'
-      );
-      
-      if (nextButton && isVisible(nextButton)) {
-        console.log("Clicking (specific next button):", nextButton);
-        nextButton.click();
+      // Aria label detection  with color check 
+      //#0056D2 -> rgb(0, 86, 210)
+      if (ariaLabel === "go to next item") {
+        const bgColor = window.getComputedStyle(el).backgroundColor;
+        if (bgColor === "rgb(0, 86, 210)" || bgColor === "rgb(0,86,210)") {
+          console.log(`Clicking (aria-label|${ariaLabel}) with matching color:`, el);
+          el.click();
+        }
+        return;
       }
-
     });
   }
 
-  setInterval(checkAndClick, 2000); //set interval in ms
+  setInterval(checkAndClick, 2000); // set interval in ms
 })();
 ```
 
